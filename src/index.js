@@ -12,16 +12,16 @@ class Array extends React.Component {
   render() {
     return (
       <div>
-        <Square value={this.props.array[0]}/>
-        <Square value={this.props.array[1]}/>
-        <Square value={this.props.array[2]}/>
-        <Square value={this.props.array[3]}/>
-        <Square value={this.props.array[4]}/>
-        <Square value={this.props.array[5]}/>
-        <Square value={this.props.array[6]}/>
-        <Square value={this.props.array[7]}/>
-        <Square value={this.props.array[8]}/>
-        <Square value={this.props.array[9]}/>
+        <Square value={this.props.array[0]} />
+        <Square value={this.props.array[1]} />
+        <Square value={this.props.array[2]} />
+        <Square value={this.props.array[3]} />
+        <Square value={this.props.array[4]} />
+        <Square value={this.props.array[5]} />
+        <Square value={this.props.array[6]} />
+        <Square value={this.props.array[7]} />
+        <Square value={this.props.array[8]} />
+        <Square value={this.props.array[9]} />
       </div>
     );
   }
@@ -29,7 +29,26 @@ class Array extends React.Component {
 
 class ControlPanel extends React.Component {
   render() {
-    return "test";
+    return (
+      <div>
+        <div>
+          <Button
+            name={"Mix"}
+            onClick={() => this.props.generateNumbers()}
+          />
+        </div>
+        <div>
+          <Button
+            name={"Bubble Sort"}
+            onClick={() => this.props.bubbleSort()}
+          />
+          <Button
+            name={"Merge Sort"}
+            onClick={() => this.props.mergeSort()}
+          />
+        </div>
+      </div>
+    );
   }
 }
 
@@ -38,23 +57,21 @@ class Sorting extends React.Component {
     array: [null, null, null, null, null, null, null, null, null, null]
   };
 
-  genNumbers(array) {
-    const unsortedArray = array.slice();
-
+  genNumbers() {
+    const unsortedArray = this.state.array.slice();
     for (let i = 0; i < unsortedArray.length; i++) {
       unsortedArray[i] = Math.round(Math.random() * 9);
     }
-
     this.setState({
       array: unsortedArray
     });
   }
 
-  bubbleSort(array) {
+  bubbleSort() {
     alert("bubbleSort");
   }
 
-  mergeSort(array) {
+  mergeSort() {
     alert("MergeSort");
   }
 
@@ -63,25 +80,14 @@ class Sorting extends React.Component {
     return (
       <div>
         <div>
-          <Array array={this.state.array}/>
+          <Array array={this.state.array} />
         </div>
         <div>
-          <div>
-            <Button
-              name={"Mix"}
-              onClick={() => this.genNumbers(this.state.array)}
-            />
-          </div>
-          <div>
-            <Button
-              name={"Bubble Sort"}
-              onClick={() => this.bubbleSort(this.state.array)}
-            />
-            <Button
-              name={"Merge Sort"}
-              onClick={() => this.mergeSort(this.state.array)}
-            />
-          </div>
+          <ControlPanel 
+            generateNumbers={() => this.genNumbers()}
+            bubbleSort={() => this.bubbleSort()}
+            mergeSort={() => this.mergeSort()}
+          />
         </div>
       </div>
     );
